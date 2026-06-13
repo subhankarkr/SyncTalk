@@ -1,0 +1,444 @@
+/* ─── Brutalist Core Tokens ────────────────────────────────────────────── */
+:root {
+  --bg: #f3efe0;
+  --border-color: #000000;
+  --primary-neon: #a3e635; /* lime green */
+  --secondary-neon: #fdba74; /* peach orange */
+  --accent-neon: #38bdf8; /* light blue */
+  --retro-yellow: #fde047;
+  --text: #000000;
+  --window-shadow: 6px 6px 0px #000000;
+  --button-shadow: 3px 3px 0px #000000;
+  --font-sans: 'Outfit', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg);
+  background-image: 
+    radial-gradient(var(--border-color) 1px, transparent 1px), 
+    radial-gradient(var(--border-color) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+  color: var(--text);
+  font-family: var(--font-sans);
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ─── Main Window container ────────────────────────────────────────────── */
+.app-window {
+  background: #ffffff;
+  border: 3px solid var(--border-color);
+  width: 100%;
+  max-width: 950px;
+  height: 760px; /* Constrained height to prevent expansion */
+  box-shadow: var(--window-shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ─── Window Header Title Bar ──────────────────────────────────────────── */
+.window-header {
+  background: var(--primary-neon);
+  border-bottom: 3px solid var(--border-color);
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.window-title {
+  font-weight: 900;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 0.05em;
+}
+
+.window-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.win-btn {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--border-color);
+  background: #ffffff;
+  cursor: pointer;
+}
+.win-btn--close { background: #f87171; }
+.win-btn--min { background: #fbbf24; }
+.win-btn--max { background: #4ade80; }
+
+/* ─── App Body Layout (Grid) ───────────────────────────────────────────── */
+.window-body {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  flex: 1; /* Stretch to occupy remaining space */
+  overflow: hidden; /* Bounded columns */
+}
+
+/* ─── Left Sidebar Configuration ────────────────────────────────────────── */
+.sidebar {
+  border-right: 3px solid var(--border-color);
+  background: #fafafa;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto; /* Scroll independently if content overflows */
+  height: 100%;
+}
+
+.section-title {
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+}
+
+.form-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 2px solid var(--border-color);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  outline: none;
+  box-shadow: inset 2px 2px 0px rgba(0,0,0,0.1);
+}
+
+.form-input:focus {
+  background: var(--bg);
+}
+
+/* ─── Brutalist Buttons ────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  border: 2px solid var(--border-color);
+  cursor: pointer;
+  background: #ffffff;
+  box-shadow: var(--button-shadow);
+  transition: all 0.15s ease;
+  outline: none;
+  font-family: var(--font-sans);
+}
+
+.btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px #000000;
+}
+
+.btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px #000000;
+}
+
+.btn--primary {
+  background: var(--accent-neon);
+}
+
+.btn--secondary {
+  background: var(--secondary-neon);
+}
+
+.btn--success {
+  background: var(--primary-neon);
+}
+
+.btn--danger {
+  background: #f87171;
+}
+
+.btn-group {
+  display: flex;
+  gap: 8px;
+}
+
+/* ─── Device Connection Status ─────────────────────────────────────────── */
+.status-box {
+  border: 2px solid var(--border-color);
+  padding: 12px;
+  background: var(--secondary-neon);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  background: #ef4444; /* offline red */
+}
+
+.status-dot--online {
+  background: var(--primary-neon);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(163, 230, 53, 0.7); }
+  70% { box-shadow: 0 0 0 6px rgba(163, 230, 53, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(163, 230, 53, 0); }
+}
+
+.status-text {
+  font-weight: 700;
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+}
+
+/* ─── Main Pane Content ────────────────────────────────────────────────── */
+.main-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: #ffffff;
+  overflow-y: auto;
+  height: 100%;
+}
+
+/* ─── Clipboard TextArea Entry ────────────────────────────────────────── */
+.clipboard-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 2px solid var(--border-color);
+  padding: 16px;
+  background: var(--bg);
+  box-shadow: var(--button-shadow);
+}
+
+.clipboard-textarea {
+  width: 100%;
+  height: 120px;
+  border: 2px solid var(--border-color);
+  padding: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  outline: none;
+  resize: none;
+  box-shadow: inset 2.5px 2.5px 0px rgba(0,0,0,0.15);
+}
+
+/* ─── Drag and Drop Zone ───────────────────────────────────────────────── */
+.drop-zone {
+  border: 3px dashed var(--border-color);
+  padding: 24px;
+  text-align: center;
+  background: #ffffff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background 0.2s ease;
+}
+
+.drop-zone--hover {
+  background: var(--retro-yellow);
+}
+
+.drop-zone-icon {
+  font-size: 2.2rem;
+}
+
+.drop-zone-text {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.drop-zone-subtext {
+  font-size: 0.8rem;
+  color: rgba(0,0,0,0.6);
+  font-family: var(--font-mono);
+}
+
+/* ─── File Progress Indicator ──────────────────────────────────────────── */
+.progress-container {
+  border: 2px solid var(--border-color);
+  padding: 10px;
+  background: #ffffff;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  font-family: var(--font-mono);
+}
+
+.progress-bar-track {
+  height: 16px;
+  background: #e2e8f0;
+  border: 2px solid var(--border-color);
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--primary-neon);
+  transition: width 0.1s linear;
+}
+
+/* ─── History Feed List ────────────────────────────────────────────────── */
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.history-item {
+  border: 2px solid var(--border-color);
+  padding: 12px 16px;
+  background: #ffffff;
+  box-shadow: var(--button-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.history-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: 4px;
+}
+
+.history-item-type {
+  font-weight: 800;
+  text-transform: uppercase;
+  background: var(--retro-yellow);
+  padding: 1px 4px;
+  border: 1px solid var(--border-color);
+}
+
+.history-item-time {
+  color: rgba(0,0,0,0.6);
+}
+
+.history-item-content {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 150px;
+  overflow-y: auto;
+  background: #fafafa;
+  padding: 8px;
+  border: 1px solid rgba(0,0,0,0.15);
+}
+
+.history-item-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.history-item-btn {
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  background: #ffffff;
+}
+
+.history-item-btn:hover {
+  background: var(--accent-neon);
+}
+
+.file-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f1f5f9;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+}
+
+.file-icon {
+  font-size: 1.8rem;
+}
+
+.file-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.file-name {
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.file-size {
+  font-size: 0.75rem;
+  color: rgba(0,0,0,0.65);
+}
+
+.history-empty {
+  text-align: center;
+  padding: 30px;
+  border: 2px dashed rgba(0,0,0,0.25);
+  color: rgba(0,0,0,0.5);
+  font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body { padding: 0.5rem; }
+  .window-body { grid-template-columns: 1fr; }
+  .sidebar { border-right: none; border-bottom: 3px solid var(--border-color); }
+}

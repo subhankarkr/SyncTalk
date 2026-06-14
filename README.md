@@ -79,14 +79,6 @@ npm run dev
 
 ---
 
-## 🚀 Deployment
-
-SyncTalk requires a persistent Node.js runtime to maintain active Socket.IO connections. 
-
-For a step-by-step walkthrough on setting up MongoDB Atlas, provisioning Render Redis, and deploying your web app, see our **[Deployment Guide (DEPLOYMENT.md)](./DEPLOYMENT.md)**.
-
----
-
 ## 📁 Project Structure
 
 ```text
